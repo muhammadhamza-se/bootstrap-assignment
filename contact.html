@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<form id="submissionForm" onsubmit="validateForm(event)">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+
+  
+  <label for="organization">Organization:</label>
+  <input type="text" id="organization" name="organization">
+
+  <label for="comments">Comments:</label>
+  <textarea id="comments" name="comments" rows="4"></textarea>
+
+  <label for="subscribe">
+    <input type="checkbox" id="subscribe" name="subscribe"> Checkbox
+  </label>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  function validateForm(event) {
+    event.preventDefault();
+
+    // Validation logic
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    
+    const organizationInput = document.getElementById('organization');
+    const commentsInput = document.getElementById('comments');
+    const subscribeCheckbox = document.getElementById('subscribe');
+
+    const nameValue = nameInput.value.trim();
+    const emailValue = emailInput.value.trim();
+   
+    const organizationValue = organizationInput.value.trim();
+    const commentsValue = commentsInput.value.trim();
+    const subscribeChecked = subscribeCheckbox.checked;
+
+    // Check if name is not empty
+    if (nameValue === '') {
+      displayError(nameInput, 'Name is required');
+      return;
+    }
+
+    // Check if name contains only alphabetic characters
+    if (!isAlpha(nameValue)) {
+      displayError(nameInput, 'Name should contain only alphabetic characters');
+      return;
+    }
+
+    // Check if email is valid
+    if (!isValidEmail(emailValue)) {
+      displayError(emailInput, 'Invalid email address');
+      return;
+    }
+
+    
+
+    // Validation for organization (optional field)
+
+    // Validation for comments (optional field)
+
+    // If all validations pass, you can submit the form or perform other actions
+    alert('Form submitted successfully!');
+  }
+
+  function isAlpha(value) {
+    const alphaRegex = /^[a-zA-Z]+$/;
+    return alphaRegex.test(value);
+  }
+
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  
+
+  function displayError(inputElement, errorMessage) {
+    const errorElement = document.createElement('div');
+    errorElement.className = 'error-message';
+    errorElement.textContent = errorMessage;
+
+    // Remove existing error message
+    const existingError = inputElement.nextElementSibling;
+    if (existingError && existingError.className === 'error-message') {
+      existingError.remove();
+    }
+
+    // Append new error message
+    inputElement.parentNode.appendChild(errorElement);
+  }
+</script>
+
+</body>
+</html>
 
