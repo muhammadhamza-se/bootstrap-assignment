@@ -62,7 +62,8 @@
   <label for="email">Email:</label>
   <input type="email" id="email" name="email" required>
 
-  
+ 
+
   <label for="organization">Organization:</label>
   <input type="text" id="organization" name="organization">
 
@@ -70,7 +71,7 @@
   <textarea id="comments" name="comments" rows="4"></textarea>
 
   <label for="subscribe">
-    <input type="checkbox" id="subscribe" name="subscribe"> Checkbox
+    <input type="checkbox" id="subscribe" name="subscribe"> Subscribe 
   </label>
 
   <button type="submit">Submit</button>
@@ -83,14 +84,14 @@
     // Validation logic
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
-    
+   
     const organizationInput = document.getElementById('organization');
     const commentsInput = document.getElementById('comments');
     const subscribeCheckbox = document.getElementById('subscribe');
 
     const nameValue = nameInput.value.trim();
     const emailValue = emailInput.value.trim();
-   
+  
     const organizationValue = organizationInput.value.trim();
     const commentsValue = commentsInput.value.trim();
     const subscribeChecked = subscribeCheckbox.checked;
@@ -115,9 +116,11 @@
 
     
 
-    // Validation for organization (optional field)
-
-    // Validation for comments (optional field)
+    // Check if organization, comments, and checkbox are not empty
+    if (organizationValue === '' || commentsValue === '' || !subscribeChecked) {
+      alert('Organization, Comments, and Subscribe checkbox should not be empty');
+      return;
+    }
 
     // If all validations pass, you can submit the form or perform other actions
     alert('Form submitted successfully!');
@@ -133,24 +136,13 @@
     return emailRegex.test(email);
   }
 
-  
+ 
 
   function displayError(inputElement, errorMessage) {
-    const errorElement = document.createElement('div');
-    errorElement.className = 'error-message';
-    errorElement.textContent = errorMessage;
-
-    // Remove existing error message
-    const existingError = inputElement.nextElementSibling;
-    if (existingError && existingError.className === 'error-message') {
-      existingError.remove();
-    }
-
-    // Append new error message
-    inputElement.parentNode.appendChild(errorElement);
+    alert(errorMessage)
+    
   }
 </script>
 
 </body>
 </html>
-
